@@ -1,6 +1,6 @@
 // Spotify API constants
 const clientId = '8b3279c55bd14a56a3a59e632a2c3e81'; // Your Spotify app client ID
-const redirectUri = 'http://127.0.0.1:5500/callback'; // Redirect URI
+const redirectUri = 'http://127.0.0.1:5500/new-al.html'; // Redirect URI
 const scope = 'user-top-read user-read-private user-read-email'; // Scopes
 
 // Function to generate a random string
