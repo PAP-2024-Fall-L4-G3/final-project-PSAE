@@ -1,0 +1,36 @@
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+  min-height: 100vh; 
+  text-align: center; 
+}
+
+/* Style the welcome message */
+#welcome {
+  font-size: 2rem;
+  color: #FFF; 
+  margin-bottom: 20px; 
+}
+
+/* Style the login button */
+#login-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #333; 
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#login-btn:hover {
+  background-color: #1ed760; 
+}
+
+body {
+  background-color: black;
+}

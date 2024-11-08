@@ -5,10 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Spotify Top Tracks</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Your Top 5 Tracks</h1>
-    <div id="tracks">Loading...</div>
+    <div id="content-container">
+        <div id="tracks-block">
+          <div id="tracks">Loading...</div>
+        </div>
+
+        <div id="recommendation-block">
+          <p>Would you like 5 song recommendations based on your top 5 tracks?</p>
+          <button id="recommend-button" onclick="getRecommendations()">Get Recommendations</button>
+          <div id="recommendations"></div>
+        </div>
+
+         <!-- Section to display the playlist info -->
+        <!-- <div id="playlist-info">
+            <p id="playlist-name">Playlist Name: Loading...</p>
+            <p id="playlist-id">Playlist ID: Loading...</p>
+        </div>
+
+        <button id="create-playlist-button" style="display: none;">Create Playlist</button>
+        <h3>Created Playlist</h3>
+        <div id="created-playlist"></div> -->
+    </div>
 
     <script src="index.js" type="module"></script>
 </body>
