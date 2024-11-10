@@ -14,6 +14,7 @@ window.addEventListener('load', async () => {
         console.log('Access Token retrieved:', token);
         localStorage.setItem('spotify_access_token', token);
         fetchTopTracks(token);
+        displayNewReleases(token);
       }
     } catch (error) {
       console.error('Error exchanging code for token:', error);
@@ -21,7 +22,7 @@ window.addEventListener('load', async () => {
   }
 });
 
-// Exchange Authorization Code for Access Token
+//Exchange Authorization Code for Access Token
 async function exchangeCodeForToken(code, codeVerifier) {
   try {
     const response = await fetch('https://accounts.spotify.com/api/token', {
@@ -64,36 +65,31 @@ function displayTracks(tracks) {
   const trackDiv = document.getElementById('tracks');
   trackDiv.innerHTML = ''; // Clear previous content if any
 
-  tracks.forEach(track => {
-    const trackElement = document.createElement('p');
-    trackElement.textContent = `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`;
+  tracks.forEach((track, index) => {
+    const trackElement = document.createElement('div');
+    trackElement.className = 'track-item';
+
+    const trackNumber = document.createElement('span');
+    trackNumber.className = 'track-number';
+    trackNumber.textContent = index + 1;
+
+    const trackInfo = document.createElement('div');
+    trackInfo.className = 'track-info';
+    trackInfo.textContent = `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`;
+
+    // Get the album image (e.g., the largest size)
+    const albumImage = document.createElement('img');
+    albumImage.className = 'album-image';
+    albumImage.src = track.album.images[0].url;  // Using the largest image (index 0)
+    albumImage.alt = `${track.name} album cover`;
+
+    // Append the album image to the track element
+    trackElement.appendChild(albumImage);
+    trackElement.appendChild(trackNumber);
+    trackElement.appendChild(trackInfo);
     trackDiv.appendChild(trackElement);
   });
 }
-
-
-
-// Get User's Spotify ID for playlist
-
-// async function getUserId(token) {
-//   try {
-//     const response = await fetch('https://api.spotify.com/v1/me', {
-//       headers: { 'Authorization': `Bearer ${token}` }
-//     });
-//     const data = await response.json();
-
-//     if (response.ok) {
-//       return data.id;
-//     } else {
-//       console.error('Failed to fetch user ID:', data);
-//       return null;
-//     }
-//   } catch (error) {
-//     console.error('Error fetching user ID:', error);
-//     return null;
-//   }
-// }
-
 
 
 // Recommendation Fetching Logic
@@ -128,17 +124,170 @@ async function getRecommendations() {
 }
 
 // Display Recommendations in HTML
-function displayRecommendations(tracks) {
-  const recommendDiv = document.getElementById('recommendations');
-  recommendDiv.innerHTML = ''; // Clear previous recommendations
+function displayRecommendations(recommendations) {
+  const recommendationsDiv = document.getElementById('recommendations');
+  recommendationsDiv.innerHTML = ''; // Clear previous content if any
 
-  tracks.forEach(track => {
-    const trackElement = document.createElement('p');
-    trackElement.textContent = `${track.name} by ${track.artists.map(artist => artist.name).join(', ')}`;
-    recommendDiv.appendChild(trackElement);
+  recommendations.forEach((recommendation, index) => {
+    const recommendationElement = document.createElement('div');
+    recommendationElement.className = 'recommendation-item';
+
+    // Create the album image element
+    const albumImage = document.createElement('img');
+    albumImage.className = 'album-image';
+    albumImage.src = recommendation.album.images[0].url;  // Use the largest album image
+    albumImage.alt = `${recommendation.name} album cover`;
+
+    const recommendationNumber = document.createElement('span');
+    recommendationNumber.className = 'recommendation-number';
+    recommendationNumber.textContent = index + 1;
+
+    const recommendationInfo = document.createElement('div');
+    recommendationInfo.className = 'recommendation-info';
+    recommendationInfo.textContent = `${recommendation.name} by ${recommendation.artists.map(artist => artist.name).join(', ')}`;
+
+    // Append the album image, recommendation number, and recommendation info
+    recommendationElement.appendChild(albumImage);
+    recommendationElement.appendChild(recommendationNumber);
+    recommendationElement.appendChild(recommendationInfo);
+    recommendationsDiv.appendChild(recommendationElement);
   });
 }
 
 
+
+
 // Assign the click event to the recommend button
 document.getElementById('recommend-button').onclick = getRecommendations;
+
+const getRefreshToken = async () => {
+  // Get the refresh token from localStorage
+  const refreshToken = localStorage.getItem('refresh_token');
+  
+  if (!refreshToken) {
+    console.error('No refresh token found!');
+    return;
+  }
+
+  const url = 'https://accounts.spotify.com/api/token';
+
+  // Prepare the payload for the refresh request
+  const payload = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken,
+      client_id: clientId,
+    }),
+  };
+
+  try {
+    const response = await fetch(url, payload);
+    const data = await response.json();
+
+    if (response.ok) {
+      // Store the new access token in localStorage
+      localStorage.setItem('access_token', data.access_token);
+
+      // If a new refresh token is returned, update it in localStorage
+      if (data.refresh_token) {
+        localStorage.setItem('refresh_token', data.refresh_token);
+      }
+
+      console.log('Access token refreshed successfully');
+    } else {
+      console.error('Failed to refresh token:', data);
+    }
+  } catch (error) {
+    console.error('Error refreshing token:', error);
+  }
+};
+
+
+// Fetch new releases using the access token
+const fetchNewReleases = async (accessToken, limit = 6, offset = 0) => {
+  const url = `https://api.spotify.com/v1/browse/new-releases?limit=${limit}&offset=${offset}`;
+  const response = await fetch(url, {
+      headers: {
+          'Authorization': `Bearer ${accessToken}`
+      }
+  });
+
+  if (!response.ok) {
+      throw new Error(`Error fetching data: ${response.status}`);
+  }
+
+  const data = await response.json();
+  return data.albums.items; // Return the array of albums
+};
+
+
+
+// Function to display new releases on the page
+const displayNewReleases = async (accessToken) => {
+  const outputDiv = document.getElementById('output');
+  outputDiv.innerHTML = ''; // Clear previous content
+
+  try {
+      const newReleases = await fetchNewReleases(accessToken);
+
+      if (newReleases.length === 0) {
+          outputDiv.innerHTML = '<p>No new releases available.</p>';
+          return;
+      }
+
+      newReleases.forEach(album => {
+          const albumDiv = document.createElement('div');
+          albumDiv.innerHTML = `
+              <h3>${album.name}</h3>
+              <img src="${album.images[0].url}" alt="${album.name}" style="width: 100px; height: 100px;">
+              <p>Release Date: ${album.release_date}</p>
+              <p>Artists: ${album.artists.map(artist => artist.name).join(', ')}</p>
+              <a href="${album.external_urls.spotify}" target="_blank">Listen on Spotify</a>
+          `;
+          outputDiv.appendChild(albumDiv);
+      });
+  } catch (error) {
+      outputDiv.innerHTML = `<p>Error fetching new releases. Please try again later.</p>`;
+      console.error(error);
+  }
+};
+
+
+// Function to sign out and redirect to the login page
+document.getElementById('signout-btn').addEventListener('click', function() {
+  // You can add additional sign-out functionality here, e.g., clearing user data, tokens, etc.
+
+  // Redirect to the login page
+  window.location.href = 'login.html';  // Replace 'login.html' with your actual login page URL
+});
+
+
+document.getElementById('signout-btn').addEventListener('click', function() {
+  // You can add additional sign-out functionality here, e.g., clearing user data, tokens, etc.
+
+  // Redirect to the login page
+  window.location.href = 'login.html';  // Replace 'login.html' with your actual login page URL
+});
+
+
+async function fetchTopTracks() {
+  const topTracks = await fetchWebApi('v1/me/top/tracks?limit=5', 'GET');
+  return topTracks.items.map(track => track.uri);
+}
+
+const tracksUri = await fetchTopTracks();  // Fetch user's top 5 tracks
+const createdPlaylist = await createPlaylist(tracksUri);  // Create playlist with the tracks
+console.log(createdPlaylist.name, createdPlaylist.id);
+
+
+
+// Call this function when you detect that the access token needs refreshing
+// await getRefreshToken();
+
+// Now you can use the new access token for Spotify API requests
+// const token = localStorage.getItem('access_token');
+// console.log('Access Token:', token);

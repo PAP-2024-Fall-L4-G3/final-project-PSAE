@@ -1,8 +1,8 @@
-const clientId = '8b3279c55bd14a56a3a59e632a2c3e81'; // Replace with your actual Spotify Client ID
-const redirectUri = 'http://127.0.0.1:5500/homePage.html';
+const clientId = '8b3279c55bd14a56a3a59e632a2c3e81'; 
+const redirectUri = 'http://127.0.0.1:5500/homePage.html'; 
 const scopes = 'user-top-read';
 
-
+// Step 1: Handle the login process
 document.getElementById('login-btn').addEventListener('click', async () => {
   const codeVerifier = generateCodeVerifier();
   localStorage.setItem('code_verifier', codeVerifier);
@@ -14,8 +14,24 @@ document.getElementById('login-btn').addEventListener('click', async () => {
   window.location.href = authUrl;
 });
 
+// Step 2: Handle redirect and exchange authorization code for token
+window.onload = async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get('code'); // Extract the 'code' parameter from the URL
 
+  if (code) {
+    const codeVerifier = localStorage.getItem('code_verifier');
+    if (codeVerifier) {
+      const accessToken = await exchangeCodeForToken(code, codeVerifier);
+      // Store the access token in localStorage
+      localStorage.setItem('access_token', accessToken);
+      console.log('Access token stored successfully');
 
+      // Redirect to a different page or update the UI to reflect the user is logged in
+      window.location.href = 'homePage.html'; // Or wherever you'd like to go after login
+    }
+  }
+};
 
 // Generate Code Verifier (PKCE)
 function generateCodeVerifier() {
@@ -45,6 +61,7 @@ async function exchangeCodeForToken(code, codeVerifier) {
       code_verifier: codeVerifier
     })
   });
+
   const data = await response.json();
-  return data.access_token;
+  return data.access_token; // Return the access token
 }
