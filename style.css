@@ -98,6 +98,22 @@
   background-color: #5C0063;
 }
 
+#refresh-albums-button{
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #3D005B;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#recommend-button:hover {
+  background-color: #5C0063;
+}
+
+
 #recommendations {
   margin-top: 15px;
   background-color: #F4F4F9;

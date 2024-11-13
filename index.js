@@ -260,7 +260,16 @@ async function displaySimilarArtistsAlbums(token, artistIds) {
   }
 }
 
-
+document.getElementById('refresh-albums-button').addEventListener('click', async () => {
+  const token = localStorage.getItem('spotify_access_token');
+  
+  if (token) {
+    // Re-fetch similar artists and display their albums
+    await fetchSimilarArtistsAlbums(token);
+  } else {
+    console.error('Access token is missing. Please authenticate again.');
+  }
+});
 
 // Function to sign out and redirect to the login page
 document.getElementById('signout-btn').addEventListener('click', function() {
