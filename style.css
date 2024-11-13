@@ -112,6 +112,24 @@
   background-color: #FFCA28;
 }
 
+#refresh-albums-button {
+  display: block;
+  width: fit-content;
+  padding: 12px 25px;
+  background: #FFB300;
+  color: #311B92;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: background-color 0.3s ease;
+}
+
+#refresh-albums-button:hover {
+  background-color: #FFCA28;
+}
+
 #recommendations {
   margin-top: 20px;
   padding: 20px;
