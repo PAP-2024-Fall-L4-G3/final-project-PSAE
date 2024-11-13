@@ -274,10 +274,6 @@ document.getElementById('signout-btn').addEventListener('click', function() {
 });
 
 
-async function fetchTopTracks() {
-  const topTracks = await fetchWebApi('v1/me/top/tracks?limit=5', 'GET');
-  return topTracks.items.map(track => track.uri);
-}
 
 const tracksUri = await fetchTopTracks();  // Fetch user's top 5 tracks
 const createdPlaylist = await createPlaylist(tracksUri);  // Create playlist with the tracks
