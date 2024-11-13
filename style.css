@@ -67,13 +67,12 @@
 
 /* Style for the recommendation block */
 #recommendation-block p {
-  font-size: 1.1em;
+  font-size: 1.6em;
   color: #fff;
   text-align: center;
 }
 
 #recommend-text {
-  font-size: 1.2em; 
   font-weight: bold; 
   text-align: center;  
   margin: 20px 0;  
@@ -84,6 +83,8 @@
 }
 
 #recommend-button {
+  font-size: 1.3em;
+  font-weight: 600;
   display: block;
   margin: 10px auto;
   padding: 10px 20px;
@@ -107,6 +108,8 @@
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1.6em;
+  font-weight: bold;
 }
 
 #recommend-button:hover {
@@ -140,13 +143,15 @@
 }
 
 .recommendation-info {
+  font-family: Arial, sans-serif;
   font-size: 1.2em;
   font-weight: bold;
   color: #3D005B; /* Adjust the color of the text */
 }
 
 /* Style for the new releases section */
-#output {
+#output, a {
+  font-family: Arial, sans-serif;
   background-color: #F4F4F9;
   border: 2px solid #E0E0E0;
   border-radius: 10px;
@@ -163,7 +168,7 @@
 }
 
 /* Style individual new releases */
-#output p {
+#output p, a {
   font-family: Arial, sans-serif;
   font-size: 0.9em;  /* Smaller font size */
   color: #fff;
@@ -210,10 +215,10 @@
 
 /* Style for the sign out button */
 #signout-btn {
-  font-size: 1.1em;
+  font-size: 2.1em;
   font-weight: bold;
   color: #fff;
-  background-color: #6C3483; /* Purple button */
+  background-color: #3D005B; /* Purple button */
   border: none;
   padding: 10px 20px;
   border-radius: 5px;
@@ -230,7 +235,7 @@
 
 
 #website-name {
-  font-size: 3em;  
+  font-size: 6em;  
   font-weight: bold;
   color: #3D005B;
   text-transform: uppercase;
@@ -254,6 +259,8 @@ a {
   cursor: pointer; 
 }
 
-
+#concerts {
+  font-size: 1.5em;
+}
 
 
