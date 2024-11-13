@@ -1,22 +1,23 @@
-<!-- home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kiku</title>
+    <title>Your Spotify Top Tracks</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="header">
-   
+  <!-- Navbar with toggle functionality -->
+  <div id="navbar" class="header">
     <p id="website-name">Kiku</p>
-    
     <button id="signout-btn">Sign Out</button>
   </div>
   
+  <!-- Toggle button for the navbar -->
+  <button id="toggle-navbar-btn">Hide Navbar</button>
+
   <a href="home.html">
-    <p id="concerts"> Want to see your favorite artists?</p>
+    <p id="concerts">Want to see your favorite artists?</p>
   </a>
   
   <div id="main-container">
@@ -33,24 +34,14 @@
   
     <div id="new-releases-block">
       <h1>New Releases</h1>
-      <button id="refresh-albums-button">Refresh Albums</button>
       <div id="output">
-        <!-- Example of new release items, each in a paragraph tag -->
         <p>Release 1</p>
         <p>Release 2</p>
         <p>Release 3</p>
-        <p>Release 4</p>
-        <p>Release 5</p>
-        <p>Release 6</p>
-        <p>Release 7</p>
-        <p>Release 8</p>
-        <p>Release 9</p>
-        <!-- Add more releases here as needed -->
       </div>
     </div>
   </div>
-  
 
-    <script src="index.js" type="module"></script>
+  <script src="index.js" type="module"></script>
 </body>
 </html>

@@ -1,259 +1,197 @@
-/* Container to hold all blocks */
+/* Main Container */
 #main-container {
   display: flex;
-  justify-content: space-between;  /* Distribute content evenly */
-  flex-wrap: wrap;  /* Allow wrapping on smaller screens */
-  gap: 20px;  /* Space between each section */
-  padding: 20px;
-  background-color: #F4F4F9;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding: 40px;
+  background: linear-gradient(135deg, #E3F2FD, #F1EFFF); /* Light gradient background */
 }
 
-/* Style for each block inside the container */
+/* Card Style for each section */
 #tracks-block, #recommendation-block, #new-releases-block {
   flex: 1;
-  min-width: 300px; /* Minimum width for each block */
-  padding: 20px;
-  background-color: #333;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 320px;
+  max-width: 400px;
+  padding: 30px;
+  background: linear-gradient(135deg, #673AB7, #311B92); /* Deep gradient background */
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  color: #FFFFFF;
+  font-family: 'Poppins', sans-serif; /* Modern font choice */
+  transition: transform 0.3s ease;
 }
 
-/* Title for each section */
-#tracks-block h1, #recommendation-block h1, #new-releases-block h1, #recommendation-block p {
-  background-color: #3D005B; /* Dark purple background to match theme */
-  padding: 20px;
-  border-radius: 8px;
-  color: #FFFFFF; /* White text for readability */
-  font-family: Arial, sans-serif;
-  margin-top: 20px;
+#tracks-block:hover, #recommendation-block:hover, #new-releases-block:hover {
+  transform: scale(1.05); /* Slightly enlarge on hover */
 }
 
-/* Style for the tracks list */
-#tracks {
-  padding: 10px;
-  background-color: #F4F4F9;
-  border-radius: 5px;
+/* Titles */
+#tracks-block h1, #recommendation-block h1, #new-releases-block h1 {
   text-align: center;
+  font-size: 1.8em;
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #FFF;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  padding: 10px 0;
+  background: linear-gradient(135deg, #9575CD, #673AB7);
+  border-radius: 10px;
+}
+
+/* Tracks List */
+#tracks {
+  padding: 15px;
+  background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  border-radius: 10px;
 }
 
 #tracks .track-item {
-  font-family: Arial, sans-serif;
-  font-weight: 600;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  padding: 10px 0;
-  color: #3D005B; 
-  border-bottom: 1px solid #6C3483; /* Optional divider color */
+  padding: 15px;
+  color: #FFC107;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.05); /* Transparent track background */
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#tracks .track-item:hover {
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .track-number {
-  font-size: 2em;
+  font-size: 1.8em;
   font-weight: bold;
-  color: #333; 
-  width: 30px;
+  width: 40px;
   text-align: center;
-  margin-right: 15px;
+  margin-right: 20px;
+  color: #FFF;
 }
 
-/* Style for the album images */
+/* Album Image */
 .album-image {
-  width: 40px;  /* Smaller width */
-  height: 40px; /* Smaller height */
-  margin-right: 10px; /* Space between the image and the track info */
-  object-fit: cover;  /* Ensures the image keeps its aspect ratio */
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  object-fit: cover;
+  border-radius: 50%; /* Circle images */
+  border: 2px solid #FFC107;
 }
 
-
-/* Style for the recommendation block */
-#recommendation-block p {
-  font-size: 1.1em;
-  color: #fff;
-  text-align: center;
-}
-
+/* Recommendation Block */
 #recommend-text {
-  font-size: 1.2em; 
-  font-weight: bold; 
-  text-align: center;  
-  margin: 20px 0;  
-  padding: 10px;  
-  background-color: #3D005B; 
-  border-radius: 5px;  
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  font-size: 1.4em;
+  font-weight: bold;
+  padding: 15px;
+  background: linear-gradient(135deg, #512DA8, #311B92);
+  color: #FFF;
+  text-align: center;
+  border-radius: 10px;
+  margin-bottom: 20px;
 }
 
 #recommend-button {
   display: block;
-  margin: 10px auto;
-  padding: 10px 20px;
-  background-color: #3D005B;
-  color: white;
+  width: fit-content;
+  padding: 12px 25px;
+  background: #FFB300;
+  color: #311B92;
+  font-weight: bold;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   cursor: pointer;
+  margin: 0 auto;
+  transition: background-color 0.3s ease;
 }
 
 #recommend-button:hover {
-  background-color: #5C0063;
+  background-color: #FFCA28;
 }
-
-#refresh-albums-button{
-  display: block;
-  margin: 10px auto;
-  padding: 10px 20px;
-  background-color: #3D005B;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#recommend-button:hover {
-  background-color: #5C0063;
-}
-
 
 #recommendations {
-  margin-top: 15px;
-  background-color: #F4F4F9;
-  padding: 10px;
-  border-radius: 5px;
-  text-align: center;
-}
-
-#recommendations .recommendation-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  padding: 10px 0;
-  border-bottom: 1px solid #6C3483; /* Optional divider color */
-}
-
-.recommendation-number {
-  font-size: 2em;
-  font-weight: bold;
-  color: #333; /* Bright green for recommendation numbers */
-  width: 30px;
-  text-align: center;
-  margin-right: 15px;
-}
-
-.recommendation-info {
-  font-size: 1.2em;
-  font-weight: bold;
-  color: #3D005B; /* Adjust the color of the text */
-}
-
-/* Style for the new releases section */
-#output {
-  background-color: #F4F4F9;
-  border: 2px solid #E0E0E0;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  padding: 10px;
-  text-align: center;
-  font-size: 1.1em;
-  color: #3D005B;
-  
-  /* Use Flexbox to arrange items */
+}
+
+/* New Releases Section */
+#output {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
-  gap: 15px; /* Adds space between items */
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
 }
 
-/* Style individual new releases */
 #output p {
-  font-family: Arial, sans-serif;
-  font-size: 0.9em;  /* Smaller font size */
-  color: #fff;
-  margin: 5px;  /* Reduced margin for a tighter layout */
+  flex-basis: calc(33.33% - 20px);
+  padding: 15px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFF;
   font-weight: bold;
-  
-  /* Each release will take up one-third of the container width */
-  flex-basis: calc(33.33% - 20px);  /* Adjusted for spacing between items */
-  box-sizing: border-box;
   text-align: center;
-  padding: 10px;
-  border-radius: 5px;  /* Optional: rounded corners for each item */
-  background-color: #333;  /* Background color for each release */
+  transition: transform 0.3s ease;
 }
 
-/* Optional: Style the album image within each release item */
-#output img {
-  width: 80%;  /* Makes the image smaller */
-  height: auto;
-  object-fit: cover;  /* Ensure the image covers the area */
-  border-radius: 5px;  /* Optional: rounded corners for images */
-  margin-bottom: 10px;  /* Adds space between the image and the text */
+#output p:hover {
+  transform: scale(1.05);
 }
 
-/* Style for the sign-out button */
-/* Style for the header container */
+/* Header and Sign-out Button */
 .header {
-  display: flex;               /* Set display to flex to align items in a row */
-  justify-content: space-between;  /* Space out items - pushes the sign out button to the right */
-  align-items: center;         /* Vertically center items */
-  padding: 20px;               /* Padding around the header */
-  background-color: #F4F4F9;   /* Background color for the header */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: #311B92;
 }
 
-/* Style for the website name */
 #website-name {
-  font-size: 3em;  
+  font-size: 2em;
   font-weight: bold;
-  color: #3D005B;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0;   /* Remove margin */
+  color: #FFF;
+  letter-spacing: 1px;
 }
 
-/* Style for the sign out button */
 #signout-btn {
-  font-size: 1.1em;
-  font-weight: bold;
-  color: #fff;
-  background-color: #6C3483; /* Purple button */
+  font-size: 1em;
+  color: #311B92;
+  background-color: #FFB300;
   border: none;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 50px;
+  font-weight: bold;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 #signout-btn:hover {
-  background-color: #6C3483;  /* Lighter purple on hover */
+  background-color: #FFCA28;
 }
 
-#signout-btn:focus {
-  outline: none;  /* Remove default outline when focused */
-}
-
-
-#website-name {
-  font-size: 3em;  
+/* Toggle Navbar Button */
+#toggle-navbar-btn {
+  position: fixed;
+  top: 20px; /* Position near the top */
+  left: 20px; /* Position near the left */
+  z-index: 1001;
+  font-size: 1em;
+  color: #311B92;
+  background-color: #FFB300;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
   font-weight: bold;
-  color: #3D005B;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0;
-  text-align: left;
-  padding: 10px;
-  background-color: #F4F4F9;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  cursor: pointer;  
-  text-decoration: none; 
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-a {
-  text-decoration: none;  
+#toggle-navbar-btn:hover {
+  background-color: #FFCA28;
 }
-
-#website-name:hover {
-  color: #6C3483;  
-  cursor: pointer; 
-}
-
-
-
-
