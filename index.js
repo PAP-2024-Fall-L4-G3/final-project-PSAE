@@ -236,12 +236,14 @@ async function displaySimilarArtistsAlbums(token, artistIds) {
 
   for (const artistId of artistIds) {
     try {
-      const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?limit=3`, {
+      const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?limit=1`, { // Limit to 1 album per artist
         headers: { 'Authorization': `Bearer ${token}` }
       });
       const data = await response.json();
 
-      data.items.forEach(album => {
+      if (data.items.length > 0) {
+        const album = data.items[0]; // Get only the first album
+
         const albumDiv = document.createElement('div');
         albumDiv.innerHTML = `
           <h3>${album.name}</h3>
@@ -251,7 +253,7 @@ async function displaySimilarArtistsAlbums(token, artistIds) {
           <a href="${album.external_urls.spotify}" target="_blank">Listen on Spotify</a>
         `;
         outputDiv.appendChild(albumDiv);
-      });
+      }
     } catch (error) {
       console.error('Error fetching albums for artist:', artistId, error);
     }
