@@ -14,7 +14,7 @@ window.addEventListener('load', async () => {
         console.log('Access Token retrieved:', token);
         localStorage.setItem('spotify_access_token', token);
         fetchTopTracks(token);
-        displayNewReleases(token);
+        fetchSimilarArtistsAlbums(token);
       }
     } catch (error) {
       console.error('Error exchanging code for token:', error);
@@ -55,10 +55,12 @@ async function fetchTopTracks(token) {
     headers: { 'Authorization': `Bearer ${token}` }
   });
   const data = await response.json();
-  displayTracks(data.items); // Display tracks after fetching
+
+  // Extract artist IDs from top tracks
+  const artistIds = data.items.map(track => track.artists[0].id);
+  localStorage.setItem('topArtistIds', JSON.stringify(artistIds)); // Store artist IDs in local storage
+  displayTracks(data.items);
 }
-
-
 
 // Display Tracks in HTML
 function displayTracks(tracks) {
@@ -207,54 +209,55 @@ const getRefreshToken = async () => {
 };
 
 
-// Fetch new releases using the access token
-const fetchNewReleases = async (accessToken, limit = 6, offset = 0) => {
-  const url = `https://api.spotify.com/v1/browse/new-releases?limit=${limit}&offset=${offset}`;
-  const response = await fetch(url, {
-      headers: {
-          'Authorization': `Bearer ${accessToken}`
-      }
-  });
-
-  if (!response.ok) {
-      throw new Error(`Error fetching data: ${response.status}`);
+async function fetchSimilarArtistsAlbums(token) {
+  const artistIds = JSON.parse(localStorage.getItem('topArtistIds'));
+  if (!artistIds || artistIds.length === 0) {
+    console.error('No artist IDs available for recommendations');
+    return;
   }
 
-  const data = await response.json();
-  return data.albums.items; // Return the array of albums
-};
+  try {
+    const response = await fetch(`https://api.spotify.com/v1/recommendations?limit=5&seed_artists=${artistIds.join(',')}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    const data = await response.json();
 
-
+    const recommendedArtists = data.tracks.map(track => track.artists[0].id);
+    displaySimilarArtistsAlbums(token, recommendedArtists);
+  } catch (error) {
+    console.error('Error fetching recommendations:', error);
+  }
+}
 
 // Function to display new releases on the page
-const displayNewReleases = async (accessToken) => {
+async function displaySimilarArtistsAlbums(token, artistIds) {
   const outputDiv = document.getElementById('output');
   outputDiv.innerHTML = ''; // Clear previous content
 
-  try {
-      const newReleases = await fetchNewReleases(accessToken);
-
-      if (newReleases.length === 0) {
-          outputDiv.innerHTML = '<p>No new releases available.</p>';
-          return;
-      }
-
-      newReleases.forEach(album => {
-          const albumDiv = document.createElement('div');
-          albumDiv.innerHTML = `
-              <h3>${album.name}</h3>
-              <img src="${album.images[0].url}" alt="${album.name}" style="width: 100px; height: 100px;">
-              <p>Release Date: ${album.release_date}</p>
-              <p>Artists: ${album.artists.map(artist => artist.name).join(', ')}</p>
-              <a href="${album.external_urls.spotify}" target="_blank">Listen on Spotify</a>
-          `;
-          outputDiv.appendChild(albumDiv);
+  for (const artistId of artistIds) {
+    try {
+      const response = await fetch(`https://api.spotify.com/v1/artists/${artistId}/albums?limit=3`, {
+        headers: { 'Authorization': `Bearer ${token}` }
       });
-  } catch (error) {
-      outputDiv.innerHTML = `<p>Error fetching new releases. Please try again later.</p>`;
-      console.error(error);
+      const data = await response.json();
+
+      data.items.forEach(album => {
+        const albumDiv = document.createElement('div');
+        albumDiv.innerHTML = `
+          <h3>${album.name}</h3>
+          <img src="${album.images[0].url}" alt="${album.name}" style="width: 100px; height: 100px;">
+          <p>Release Date: ${album.release_date}</p>
+          <p>Artists: ${album.artists.map(artist => artist.name).join(', ')}</p>
+          <a href="${album.external_urls.spotify}" target="_blank">Listen on Spotify</a>
+        `;
+        outputDiv.appendChild(albumDiv);
+      });
+    } catch (error) {
+      console.error('Error fetching albums for artist:', artistId, error);
+    }
   }
-};
+}
+
 
 
 // Function to sign out and redirect to the login page
@@ -272,8 +275,6 @@ document.getElementById('signout-btn').addEventListener('click', function() {
   // Redirect to the login page
   window.location.href = 'login.html';  // Replace 'login.html' with your actual login page URL
 });
-
-
 
 const tracksUri = await fetchTopTracks();  // Fetch user's top 5 tracks
 const createdPlaylist = await createPlaylist(tracksUri);  // Create playlist with the tracks
