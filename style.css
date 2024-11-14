@@ -1,7 +1,7 @@
 /* Main Container */
 #main-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 30px;
   padding: 40px;
@@ -57,6 +57,7 @@
   background-color: rgba(255, 255, 255, 0.05); /* Transparent track background */
   border-radius: 10px;
   transition: background-color 0.3s ease;
+  font-size: 1.2em;
 }
 
 #tracks .track-item:hover {
@@ -64,11 +65,12 @@
 }
 
 .track-number {
-  font-size: 1.8em;
+  font-size: 2em;
   font-weight: bold;
-  width: 40px;
+  color: #333; 
+  width: 30px;
   text-align: center;
-  margin-right: 20px;
+  margin-right: 15px;
   color: #FFF;
 }
 
@@ -83,18 +85,28 @@
 }
 
 /* Recommendation Block */
-#recommend-text {
-  font-size: 1.4em;
-  font-weight: bold;
-  padding: 15px;
-  background: linear-gradient(135deg, #512DA8, #311B92);
-  color: #FFF;
+
+
+#recommendation-block p {
+  font-size: 1.6em;
+  color: #fff;
   text-align: center;
-  border-radius: 10px;
-  margin-bottom: 20px;
+}
+
+#recommend-text {
+  background: linear-gradient(135deg, #512DA8, #311B92);
+  color: #FFC107;
+  font-weight: bold; 
+  text-align: center;  
+  margin: 20px 0;  
+  padding: 10px;  
+  background-color: #3D005B; 
+  border-radius: 5px;  
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #recommend-button {
+  font-size: 1.5em;
   display: block;
   width: fit-content;
   padding: 12px 25px;
@@ -124,6 +136,7 @@
   cursor: pointer;
   margin: 0 auto;
   transition: background-color 0.3s ease;
+  font-size: 1.5em;
 }
 
 #refresh-albums-button:hover {
@@ -135,15 +148,52 @@
   padding: 20px;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
+  text-align: center;
 }
+
+#recommendations .recommendation-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #6C3483; /* Optional divider color */
+}
+
+.recommendation-number {
+  font-size: 2em;
+  font-weight: bold;
+  color: #fff; 
+  width: 30px;
+  text-align: center;
+  margin-right: 15px;
+}
+
+.recommendation-info {
+  font-family: Arial, sans-serif;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #FFB300; /* Adjust the color of the text */
+}
+
 
 /* New Releases Section */
 #output {
+  font-family: Arial, sans-serif;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
   padding: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.1em;
+
+    /* Use Flexbox to arrange items */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 15px; /* Adds space between items */
 }
 
 #output p {
@@ -171,14 +221,16 @@
 }
 
 #website-name {
-  font-size: 2em;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 4.5em;
   font-weight: bold;
   color: #FFF;
   letter-spacing: 1px;
 }
 
 #signout-btn {
-  font-size: 1em;
+  font-size: 1.5em;
   color: #311B92;
   background-color: #FFB300;
   border: none;
