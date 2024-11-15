@@ -87,7 +87,6 @@
 }
 
 /* Recommendation Block */
-<<<<<<< HEAD
 
 
 #recommendation-block p {
@@ -106,18 +105,6 @@
   background-color: #3D005B; 
   border-radius: 5px;  
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-=======
-#recommend-text {
-  font-size: 1.4em;
-  font-weight: bold;
-  padding: 15px;
-  background: linear-gradient(135deg, #9479c2, #673AB7);
-  color: #FFF;
-  text-align: center;
-  border-radius: 10px;
-  margin-top: 0;
-  margin-bottom: 20px;
->>>>>>> 227ff251b4e780d606ce9a4b8b5f12092d9234f1
 }
 
 #recommend-button {
@@ -193,7 +180,6 @@
 
 /* New Releases Section */
 #output {
-<<<<<<< HEAD
   font-family: Arial, sans-serif;
   display: flex;
   flex-wrap: wrap;
@@ -210,16 +196,6 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     gap: 15px; /* Adds space between items */
-=======
-  display: flex; /* Use Flexbox to arrange items horizontally */
-  flex-direction: row; /* Ensure the items are in a row */
-  justify-content: flex-start; /* Align items to the left, you can change this to center or space-between if needed */
-  gap: 20px; /* Optional: Adds space between items */
-  overflow-x: auto; /* Optional: Adds horizontal scrolling if there are too many items to fit */
-  padding: 20px; /* Optional: Adds padding around the container */
-  height: auto;
-  width: auto;
->>>>>>> 227ff251b4e780d606ce9a4b8b5f12092d9234f1
 }
 
 #output p {
