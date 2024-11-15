@@ -245,7 +245,7 @@ async function displaySimilarArtistsAlbums(token, artistIds) {
         const album = data.items[0]; // Get only the first album
 
         // Limit the album title to 11 characters
-        const albumTitle = album.name.length > 8 ? album.name.slice(0, 8) + '...' : album.name;
+        const albumTitle = album.name.length > 30 ? album.name.slice(0, 30) + '...' : album.name;
 
         const albumDiv = document.createElement('div');
         albumDiv.className = 'album-item'; // Add a class for styling

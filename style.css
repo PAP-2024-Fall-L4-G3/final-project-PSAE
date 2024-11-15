@@ -11,8 +11,8 @@
 /* Card Style for each section */
 #tracks-block, #recommendation-block, #new-releases-block {
   flex: 1;
-  min-width: 320px;
-  max-width: 400px;
+  min-width: 220px;
+  max-width: 300px;
   padding: 30px;
   background: linear-gradient(135deg, #18343b, #1e1353); /* Deep gradient background */
   border-radius: 20px;
@@ -37,7 +37,7 @@
   letter-spacing: 1.5px;
   padding: 10px 0;
   background: linear-gradient(135deg, #9479c2, #673AB7);
-  border-radius: 10px;
+  border-radius: 15px;
 }
 
 /* Tracks List */
@@ -96,14 +96,15 @@
 }
 
 #recommend-text {
-  background: linear-gradient(135deg, #512DA8, #311B92);
+  background: linear-gradient(135deg, #9479c2, #673AB7);
   color: #FFC107;
   font-weight: bold; 
   text-align: center;  
-  margin: 20px 0;  
+  margin: 20px 0;
+  margin-top: 0;  
   padding: 10px;  
   background-color: #3D005B; 
-  border-radius: 5px;  
+  border-radius: 15px;  
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -226,7 +227,7 @@
 #website-name {
   font-family: Arial, sans-serif;
   font-weight: bold;
-  font-size: 4.5em;
+  font-size: 2em;
   font-weight: bold;
   color: #FFF;
   letter-spacing: 1px;
