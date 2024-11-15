@@ -244,9 +244,14 @@ async function displaySimilarArtistsAlbums(token, artistIds) {
       if (data.items.length > 0) {
         const album = data.items[0]; // Get only the first album
 
+        // Limit the album title to 11 characters
+        const albumTitle = album.name.length > 30 ? album.name.slice(0, 30) + '...' : album.name;
+
         const albumDiv = document.createElement('div');
+        albumDiv.className = 'album-item'; // Add a class for styling
+
         albumDiv.innerHTML = `
-          <h3>${album.name}</h3>
+          <h3>${albumTitle}</h3>
           <img src="${album.images[0].url}" alt="${album.name}" style="width: 100px; height: 100px;">
           <p>Release Date: ${album.release_date}</p>
           <p>Artists: ${album.artists.map(artist => artist.name).join(', ')}</p>
@@ -259,6 +264,8 @@ async function displaySimilarArtistsAlbums(token, artistIds) {
     }
   }
 }
+
+
 
 document.getElementById('refresh-albums-button').addEventListener('click', async () => {
   const token = localStorage.getItem('spotify_access_token');
