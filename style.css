@@ -96,28 +96,19 @@
 }
 
 #recommend-text {
-<<<<<<< HEAD
-=======
-  background: linear-gradient(135deg, #9479c2, #673AB7);
-  color: #FFC107;
->>>>>>> ed7d659a9a5f9d9fd6aef7abff521d84cbbaaf3c
   font-weight: bold; 
   text-align: center;  
   margin: 20px 0;
   margin-top: 0;  
   padding: 10px;  
-  background-color: #3D005B; 
+  background: linear-gradient(135deg, #9479c2, #673AB7);
   border-radius: 15px;  
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 #recommend-button {
-<<<<<<< HEAD
   font-size: 1.3em;
   font-weight: 600;
-=======
-  font-size: 1.5em;
->>>>>>> ed7d659a9a5f9d9fd6aef7abff521d84cbbaaf3c
   display: block;
   width: fit-content;
   padding: 12px 25px;
@@ -145,14 +136,8 @@
   border: none;
   border-radius: 50px;
   cursor: pointer;
-<<<<<<< HEAD
   font-size: 1.6em;
   font-weight: bold;
-=======
-  margin: 0 auto;
-  transition: background-color 0.3s ease;
-  font-size: 1.5em;
->>>>>>> ed7d659a9a5f9d9fd6aef7abff521d84cbbaaf3c
 }
 
 #refresh-albums-button:hover {
@@ -191,23 +176,9 @@
   color: #FFB300; /* Adjust the color of the text */
 }
 
-<<<<<<< HEAD
 /* Style for the new releases section */
 #output, a {
   font-family: Arial, sans-serif;
-  background-color: #F4F4F9;
-  border: 2px solid #E0E0E0;
-=======
-
-/* New Releases Section */
-#output {
-  font-family: Arial, sans-serif;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
->>>>>>> ed7d659a9a5f9d9fd6aef7abff521d84cbbaaf3c
   border-radius: 10px;
   padding: 10px;
   text-align: center;
@@ -220,7 +191,6 @@
     gap: 15px; /* Adds space between items */
 }
 
-<<<<<<< HEAD
 /* Style individual new releases */
 #output p, a {
   font-family: Arial, sans-serif;
@@ -231,10 +201,6 @@
   
   /* Each release will take up one-third of the container width */
   flex-basis: calc(33.33% - 20px);  /* Adjusted for spacing between items */
-=======
-#output p {
-  flex-basis: calc(33.33% - 20px);
->>>>>>> ed7d659a9a5f9d9fd6aef7abff521d84cbbaaf3c
   box-sizing: border-box;
   padding: 15px;
   border-radius: 10px;
@@ -268,16 +234,10 @@
 }
 
 #signout-btn {
-<<<<<<< HEAD
   font-size: 2.1em;
   font-weight: bold;
   color: #fff;
   background-color: #3D005B; /* Purple button */
-=======
-  font-size: 1.5em;
-  color: #311B92;
-  background-color: #FFB300;
->>>>>>> ed7d659a9a5f9d9fd6aef7abff521d84cbbaaf3c
   border: none;
   padding: 10px 20px;
   border-radius: 50px;
@@ -289,7 +249,6 @@
 #signout-btn:hover {
   background-color: #FFCA28;
 }
-<<<<<<< HEAD
 
 #signout-btn:focus {
   outline: none;  /* Remove default outline when focused */
@@ -299,13 +258,12 @@
 #website-name {
   font-size: 6em;  
   font-weight: bold;
-  color: #3D005B;
+  color: white;
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0;
   text-align: left;
   padding: 10px;
-  background-color: #F4F4F9;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   cursor: pointer;  
@@ -326,5 +284,3 @@ a {
 }
 
 
-=======
->>>>>>> ed7d659a9a5f9d9fd6aef7abff521d84cbbaaf3c
